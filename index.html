@@ -139,7 +139,39 @@
                 margin-top: 100px; /* Increased margin-top for even more space on smaller screens */
             }
         }
+
+        .header myInput {
+            background-image: url('./images/searchicon.png'); /* Add a search icon to input */
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 5px;
     </style>
+
+    <script>
+      function myFunction() {
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('myInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("marquee-grid");
+        li = ul.getElementsByClassName('marquee-item');
+    
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+          a = li[i].getElementsByClassName("title")[0];
+          txtValue = a.textContent || a.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+          } else {
+            li[i].style.display = "none";
+          }
+        }
+      }
+    </script>
 </head>
 <body>
 
@@ -158,13 +190,14 @@
         </div>
 
         <div>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
             <button onclick="location.href='contactme.php'" class="contact-button">Contact Me</button>
             <button onclick="location.href='about.php'" class="info-button">Info</button> <!-- Info Button -->
         </div>
     </div>
 
     <div class="content">
-        <div class="marquee-grid">
+        <div class="marquee-grid" id="marquee-grid">
                                                 <div class="marquee-item">
                         <a href="Marquee/Alvin G and co logo/thumbnail.png">
                             <img src="Marquee/Alvin G and co logo/thumbnail.png" alt="Alvin G and co logo">
